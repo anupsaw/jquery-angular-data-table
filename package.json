@@ -1,0 +1,20 @@
+{
+  "name": "jquery-data-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "~3.3.5",
+    "datatables.net-bs": "^1.10.16"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  }
+}
