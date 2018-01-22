@@ -1,17 +1,11 @@
 {
-  "name": "jquery-data-table",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "demo",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "angular": "^1.5.3",
-    "bootstrap": "~3.3.5",
-    "datatables.net-bs": "^1.10.16",
     "async": "^2.6.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -27,8 +21,5 @@
     "serve-favicon": "~2.4.5",
     "sort-object-properties": "^0.3.3",
     "underscore": "^1.8.3"
-  },
-  "devDependencies": {
-    "lite-server": "^2.3.0"
   }
 }

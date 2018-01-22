@@ -1,0 +1,30 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+   
+    /*
+th {
+  background-color: white;
+}
+tr:nth-child(odd) {
+  background-color: grey;
+}
+th, td {
+  padding: 0.5rem;
+}
+td:hover {
+  background-color: lightsalmon;
+}
+
+
+    .paginate_button {
+        border-radius: 0 !important;
+    }*/
+    
