@@ -52,7 +52,7 @@ exports.getdatatable = function (body) {
     }
 
     if (body.pageNo) {
-        page = body.start + 1;
+        page = body.draw;
     }
 
     if (body.sort && body.colName) {
@@ -84,9 +84,9 @@ exports.getdatatable = function (body) {
         userslist = pagination;
     }
     return {
-        draw: 1,
+        draw: body.draw,
         recordsTotal: listLength,
-        recordsFiltered: userslist.length,
+        recordsFiltered: listLength,
         data: userslist
     };
 
