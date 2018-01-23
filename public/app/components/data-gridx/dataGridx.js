@@ -22,7 +22,7 @@
                                 "type": "POST"
                             },
                             "columns": [
-                                { "data": "first_name" },
+                                { "data": "first_name", "searchable": false, "orderable": false, "search": { "value": true } },
                                 { "data": "last_name" },
                                 { "data": "position" },
                                 { "data": "office" },

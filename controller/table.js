@@ -37,6 +37,19 @@ exports.tabledata = function (err) {
 }
 
 
+exports.getFullTableData = function () {
+    let usersdata = jsonfile.readFileSync(tabledata);
+    let userslist = usersdata.data;
+    let listLength = userslist.length;
+    return {
+        draw: 1,
+        recordsTotal: listLength,
+        recordsFiltered: listLength,
+        data: userslist
+    };
+}
+
+
 
 
 exports.getdatatable = function (body) {

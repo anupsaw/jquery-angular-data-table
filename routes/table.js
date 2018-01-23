@@ -6,9 +6,9 @@ var fs = require('fs');
 /* GET home page. */
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  //res.send('respond with a resource');
-  res.render('table');
+router.get('/', function (req, res, next) {
+    //res.send('respond with a resource');
+    res.render('table');
 });
 
 
@@ -20,42 +20,47 @@ router.get('/', function(req, res, next) {
 }); 
 */
 
-router.get('/table', function(req, res) {
-   
-   let tabledata=users.tabledata();
-   console.log("tabledata",tabledata);
+router.get('/table', function (req, res) {
+
+    let tabledata = users.tabledata();
+    console.log("tabledata", tabledata);
     //return res.json({status:'success',data:tabledata});
-    fs.writeFile('file.csv', csv, function(err) {
-	  if (err) throw err;
-	  console.log('file saved');
-	});
+    fs.writeFile('file.csv', csv, function (err) {
+        if (err) throw err;
+        console.log('file saved');
+    });
 
 });
 
-router.post('/tabledata', function(req, res,err) {
-	console.log('body',req.body);
+router.get('/tabledata', function (req, res, err) {
+    let userCountDetails = users.getFullTableData();
+    return res.json(userCountDetails);
+});
+
+router.post('/tabledata', function (req, res, err) {
+    console.log('body', req.body);
     let body = req.body;
     let userCountDetails = users.getdatatable(body);
-/*    let userCountDetails = users.getdatatable(body,function(err,result){
-        if(err){
-        	errorMessage = 'Please Try Again';
-        	return res.json({
-                status: "error",
-                message: errorMessage,
-            })
-        }
-       return res.json(userCountDetails);
-    });
-*/        
-  return res.json(userCountDetails);
+    /*    let userCountDetails = users.getdatatable(body,function(err,result){
+            if(err){
+                errorMessage = 'Please Try Again';
+                return res.json({
+                    status: "error",
+                    message: errorMessage,
+                })
+            }
+           return res.json(userCountDetails);
+        });
+    */
+    return res.json(userCountDetails);
 });
 
-router.post('/tabledata1', function(req, res) {
-    
-    let userCountDetails = users.getdatatable();
-        return res.json(userCountDetails);
+router.post('/tabledata1', function (req, res) {
 
-});        
+    let userCountDetails = users.getdatatable();
+    return res.json(userCountDetails);
+
+});
 
 
 module.exports = router;
