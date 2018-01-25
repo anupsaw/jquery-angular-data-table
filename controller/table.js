@@ -1,6 +1,7 @@
 const path = require("path");
 const jsonfile = require('jsonfile');
 const tabledata = path.join(__dirname, '../data/tabledata.json');
+const tabledata2 = path.join(__dirname, '../data/candidate-guru-data.json');
 const async = require('async');
 //var do_sort = require('sort-object-properties');
 const load = require('lodash');
@@ -50,7 +51,58 @@ exports.getFullTableData = function () {
 }
 
 
+exports.getdatatable2 = function (body) {
+    //{params: colName-as defined in data,order-'asc' or 'desc',search-any keyword,sort-'true',pageNo-current page no.}
+    var keyword = '';
+    var colName = '';
+    var page = 1;
+    var sort = '';
+    var order = 'asc';
+    if (body.search) {
+        keyword = body.search;
 
+    }
+
+    if (body.pageNo) {
+        page = body.draw;
+    }
+
+    if (body.sort && body.colName) {
+        sort = body.sort;
+        colName = body.colName;
+    }
+
+    if (body.sort && body.order) {
+        order = body.order;
+    }
+    /*query db */
+    let usersdata = jsonfile.readFileSync(tabledata2);
+    let userslist = usersdata.data;
+    let listLength = userslist.length;
+    /*search*/
+    if (keyword) {
+        var search_data = filterRecords(keyword, userslist);
+        userslist = search_data;
+    }
+    /*Sort Data */
+    if (colName != '') {
+        var sort_data = sort_by_colName(colName, order, userslist);
+        userslist = sort_data;
+    }
+    /*pagination*/
+    var perPageRecords = body.length;
+    if (page != 0) {
+        var pagination = getPaginatedItems(userslist, page, perPageRecords);
+        userslist = pagination;
+    }
+    return {
+        draw: body.draw,
+        recordsTotal: listLength,
+        recordsFiltered: listLength,
+        data: userslist
+    };
+
+}
 
 exports.getdatatable = function (body) {
     //{params: colName-as defined in data,order-'asc' or 'desc',search-any keyword,sort-'true',pageNo-current page no.}

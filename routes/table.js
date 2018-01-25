@@ -37,6 +37,24 @@ router.get('/tabledata', function (req, res, err) {
     return res.json(userCountDetails);
 });
 
+router.post('/tabledata2', function (req, res, err) {
+    console.log('body', req.body);
+    let body = req.body;
+    let userCountDetails = users.getdatatable2(body);
+    /*    let userCountDetails = users.getdatatable(body,function(err,result){
+            if(err){
+                errorMessage = 'Please Try Again';
+                return res.json({
+                    status: "error",
+                    message: errorMessage,
+                })
+            }
+           return res.json(userCountDetails);
+        });
+    */
+    return res.json(userCountDetails);
+});
+
 router.post('/tabledata', function (req, res, err) {
     console.log('body', req.body);
     let body = req.body;

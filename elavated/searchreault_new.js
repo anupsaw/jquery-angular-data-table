@@ -986,9 +986,10 @@ var load_jquery_datatable = function () {
     "processing": true,
     "serverSide": true,
     "ajax": {
-      "url": '/get_data',
+      "url": '/get_datatable',
       "type": 'POST',
       'beforeSend': function (request) {
+        console.log('This is called');
         request.setRequestHeader('x-csrf-token', v_token);
       }
     },
