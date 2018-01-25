@@ -210,6 +210,8 @@ $(window).on('resize',function(){
  * on load functionality
  */
 window.onload = function () {
+    //send_request_to_datatable();
+
 	try{
 		$("#headersearch").addClass("active-nav");
 		$("#headersearch-ss").removeClass('white-styling');
@@ -220,6 +222,75 @@ window.onload = function () {
 		console.log(configuration_var.search_query_builder + configuration_var.on_load_fail + ":" + err);
 	}
 };
+
+$( document ).ready(function() {
+	send_request_to_datatable(); 	
+	send_request_to_data();
+});
+var send_request_to_datatable = function(){
+	try{
+		
+		var v_token=get_cookie('csrf_token');
+		var dataValue;
+		$.ajax({
+			url: '/get_datatable',
+			type: "POST",
+			dataType: "json",
+			data:{ draw:'1',
+		           colName:'0',
+		           pageNo:'1',
+		           search:'zx'},
+			headers:
+			{
+				'x-csrf-token' : v_token
+				//'correlation_id':correlation_id
+
+			},
+			success:function(data){
+				console.log("===DAta===",data)
+				dataValue = data;
+				console.log("===$scope.dataValue===",dataValue)
+
+			},
+			error: function(jqXHR, exception) {
+				if(jqXHR){
+					show_error_message(jqXHR);
+				}
+				handle_errors(jqXHR.status,exception,jqXHR.responseText);
+			}
+		});
+	}catch(err){
+		console.log(err);
+	}
+};
+
+var send_request_to_data = function(){
+	try{
+		var v_token=get_cookie('csrf_token');
+		console.log("v_token",correlation_id);
+		
+		$.ajax({
+			url: '/get_data',
+			type: "GET",
+			dataType: "json",
+			success:function(data){
+				console.log("=====DAta=====",data)
+
+			},
+			error: function(jqXHR, exception) {
+				if(jqXHR){
+					show_error_message(jqXHR);
+				}
+				handle_errors(jqXHR.status,exception,jqXHR.responseText);
+			}
+		});
+	}catch(err){
+		console.log(err);
+	}
+};
+
+
+
 
 /**
  * Function for getting model id's
@@ -3499,3 +3570,6 @@ var remove_plus_button=function(){
 		}
 	}
 }
+
+
+

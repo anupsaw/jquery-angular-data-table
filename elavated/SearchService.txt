@@ -1454,7 +1454,7 @@
     //Datatable code start
     SearchService.prototype.get_data = function (req, res) {
 
-    var  usersdata = MyjsonData;
+      usersdata = MyjsonData;
 
       var correlation_id;
       correlation_id = req.headers['correlation_id'];
