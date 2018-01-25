@@ -19,7 +19,10 @@
                             "serverSide": true,
                             "ajax": {
                                 "url": "/table/tabledata",
-                                "type": "POST"
+                                "type": "POST",
+                                'beforeSend': function (request) {
+                                    request.setRequestHeader('x-csrf-token', 'anup');
+                                  }
                             },
                             "columns": [
                                 { "data": "first_name", "searchable": false, "orderable": false, "search": { "value": true } },

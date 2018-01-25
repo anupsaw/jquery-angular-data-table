@@ -987,7 +987,10 @@ var load_jquery_datatable = function () {
     "serverSide": true,
     "ajax": {
       "url": '/get_data',
-      "type": 'POST'
+      "type": 'POST',
+      'beforeSend': function (request) {
+        request.setRequestHeader('x-csrf-token', v_token);
+      }
     },
     "columns": [
       { "data": "PersonID", "searchable": false, "orderable": false, },

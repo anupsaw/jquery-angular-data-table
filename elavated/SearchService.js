@@ -1454,10 +1454,10 @@
     //Datatable code start
     SearchService.prototype.get_data = function (req, res) {
 
-    var  usersdata = MyjsonData;
+    var  usersdata = MyjsonData.data;
 
       var correlation_id;
-      correlation_id = req.headers['correlation_id'];
+    //  correlation_id = req.headers['correlation_id'];
       this.logger.debug(correlation_id, 'is_user_logged_in : Entry -');
       return res.send({
         draw: 1,
