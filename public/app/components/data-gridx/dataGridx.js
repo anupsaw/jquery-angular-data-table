@@ -67,7 +67,7 @@ var v_token = 'anup'
                         "processing": true,
                         "serverSide": true,
                         "ajax": {
-                          "url": '/table/tabledata2',
+                          "url": '/table/get_datatable',
                           "type": 'POST',
                           'beforeSend': function (request) {
                             request.setRequestHeader('x-csrf-token', v_token);

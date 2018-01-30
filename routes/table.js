@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const users = require('../controller/table');
+const get_datatable = require('../controller/tableNew');
 const load = require('lodash');
 var fs = require('fs');
 /* GET home page. */
@@ -20,6 +21,9 @@ router.get('/', function (req, res, next) {
 }); 
 */
 
+router.post('/get_datatable', function(req, res, err){
+    get_datatable.get_datatable(req, res);
+});
 router.get('/table', function (req, res) {
 
     let tabledata = users.tabledata();
@@ -36,6 +40,8 @@ router.get('/tabledata', function (req, res, err) {
     let userCountDetails = users.getFullTableData();
     return res.json(userCountDetails);
 });
+
+
 
 router.post('/tabledata2', function (req, res, err) {
     console.log('body', req.body);
