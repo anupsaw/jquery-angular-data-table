@@ -21,9 +21,13 @@ router.get('/', function (req, res, next) {
 }); 
 */
 
-router.post('/get_datatable', function(req, res, err){
+router.post('/get_datatable', function (req, res, err) {
     get_datatable.get_datatable(req, res);
 });
+
+router.get('/getCsvFile', function (req, res, err) {
+     get_datatable.getCSVFile(req, res);
+})
 router.get('/table', function (req, res) {
 
     let tabledata = users.tabledata();

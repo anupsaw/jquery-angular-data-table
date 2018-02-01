@@ -128,12 +128,40 @@ function logger(data) {
 
     var file = './request_body.log';
     if (fs.existsSync(file)) {
-        var dateTime  = new Date()
-       // var timeStamp = dateTime.toDateString() + ' ' + dateTime.toTimeString();
+        var dateTime = new Date()
+        // var timeStamp = dateTime.toDateString() + ' ' + dateTime.toTimeString();
         fs.appendFileSync(file, ("\n" + dateTime + ' : ' + data));
-    } else { 
+    } else {
         fs.writeFileSync(file, data);
     }
 
 
+}
+
+exports.getCSVFile = function (req, res) {
+
+    var data = jsonfile.readFileSync(tabledata2);
+    var fields = [];
+    var firstRow = data.data[0];
+    for (var prop in firstRow) {
+        fields.push(prop);
+    }
+
+    json2csv({ data: data.data, fields: fields }, function (err, csv) {
+        if (err) {
+            throw err;
+        } else {
+            var path = './csv' + Date.now() + '.csv';
+            fs.writeFile(path, csv, function (err, data) {
+                if (err) { throw err; }
+                else {
+                    console.log('file Created');
+                    res.setHeader('Content-disposition', 'attachment; filename=data.csv');
+                    res.set('Content-Type', 'text/csv');
+                    res.status(200).send(csv);
+                    //I need to download above creating csv file here
+                }
+            });
+        }
+    });
 }
